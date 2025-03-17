@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cacxig65cbx2c"]
+
+[ext_resource type="Texture2D" uid="uid://lknlcjdin5r4" path="res://Assets/PNG/Objects/stick_metal_outline.png" id="1_e1yvt"]
+[ext_resource type="Script" uid="uid://cc0cep5bsyfbj" path="res://target.gd" id="1_uqips"]
+[ext_resource type="Texture2D" uid="uid://dtydkljk7y8ox" path="res://Assets/PNG/Objects/target_red2_outline.png" id="2_5ebp1"]
+[ext_resource type="Texture2D" uid="uid://powmhbkx82rt" path="res://Assets/PNG/Objects/target_back_outline.png" id="4_ufrq1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqips"]
+size = Vector2(14, 113)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ufrq1"]
+radius = 70.0071
+
+[node name="Target" type="Node2D"]
+script = ExtResource("1_uqips")
+
+[node name="Stick" type="Area2D" parent="."]
+position = Vector2(0, 104)
+
+[node name="Sprite" type="Sprite2D" parent="Stick"]
+texture = ExtResource("1_e1yvt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stick"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_uqips")
+
+[node name="Bullseye" type="Area2D" parent="."]
+scale = Vector2(0.75, 0.75)
+
+[node name="FrontSprite" type="Sprite2D" parent="Bullseye"]
+texture = ExtResource("2_5ebp1")
+
+[node name="BackSprite" type="Sprite2D" parent="Bullseye"]
+visible = false
+texture = ExtResource("4_ufrq1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullseye"]
+shape = SubResource("CircleShape2D_ufrq1")
+
+[node name="holes" type="Node2D" parent="."]
+
+[connection signal="input_event" from="Bullseye" to="." method="_on_bullseye_input_event"]

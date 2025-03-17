@@ -1,14 +1,35 @@
-[gd_scene load_steps=8 format=3 uid="uid://cc46sll2x4x5h"]
+[gd_scene load_steps=9 format=3 uid="uid://cc46sll2x4x5h"]
 
 [ext_resource type="Texture2D" uid="uid://c7ayovqw2ulg4" path="res://Assets/PNG/Stall/grass1.png" id="1_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cg44ws7alg0ya" path="res://Assets/PNG/Stall/bg_wood.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cwvel1dp367yi" path="res://Assets/PNG/Stall/curtain.png" id="1_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cacxig65cbx2c" path="res://target.tscn" id="2_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bh36wrvrjew6o" path="res://Assets/PNG/Stall/curtain_rope.png" id="2_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cdtlmwrw371ep" path="res://Assets/PNG/Stall/curtain_straight.png" id="3_272bh"]
 [ext_resource type="Texture2D" uid="uid://bvx1fgyymb505" path="res://Assets/PNG/Stall/curtain_top.png" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://b8y8ugia3ch8c" path="res://shooter.tscn" id="7_272bh"]
 
 [node name="Main" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(800, 450)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 800.0
+offset_bottom = 450.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ig7tw")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Target" parent="." instance=ExtResource("2_5vw27")]
+position = Vector2(356, 192)
 
 [node name="Grass" type="TextureRect" parent="."]
 offset_top = 286.0
@@ -49,22 +70,5 @@ offset_right = 758.0
 offset_bottom = 80.0
 texture = ExtResource("3_272bh")
 stretch_mode = 1
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(800, 450)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 800.0
-offset_bottom = 450.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_ig7tw")
-stretch_mode = 1
-metadata/_edit_lock_ = true
 
 [node name="Shooter" parent="." instance=ExtResource("7_272bh")]

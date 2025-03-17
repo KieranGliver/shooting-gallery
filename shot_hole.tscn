@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq5nf3h6jspd"]
+
+[ext_resource type="Texture2D" uid="uid://bvlmdrvbeo14g" path="res://Assets/PNG/Objects/shot_blue_small.png" id="1_k71k8"]
+
+[node name="ShotHole" type="Sprite2D"]
+texture = ExtResource("1_k71k8")
