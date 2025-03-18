@@ -1,7 +1,9 @@
 class_name Target
 extends Node2D
 
-var shot_hole: PackedScene = preload("res://shot_hole.tscn")
+const ShotHole: PackedScene = preload("res://shot_hole.tscn")
+
+@export var velocity: Vector2 = Vector2.ZERO
 
 @onready var bullseye: Area2D = $Bullseye
 @onready var front_sprite: Sprite2D = $Bullseye/FrontSprite
@@ -9,11 +11,24 @@ var shot_hole: PackedScene = preload("res://shot_hole.tscn")
 @onready var hole_container: Node2D = $holes
 
 
-func _on_bullseye_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _physics_process(delta: float) -> void:
+	position = position + velocity * delta
+
+
+func _on_bullseye_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			spin(0.75)
 			create_hole(to_local(event.position))
+
+
+func _on_stick_area_entered(area: Area2D) -> void:
+	if area.is_in_group("death"):
+		destroy()
+
+
+func destroy():
+	queue_free()
 
 
 func spin(duration: float = 1.0):
@@ -46,6 +61,6 @@ func toggle_sprite():
 
 
 func create_hole(local_position: Vector2):
-	var hole = shot_hole.instantiate()
+	var hole = ShotHole.instantiate()
 	hole.position = local_position
 	hole_container.add_child(hole)

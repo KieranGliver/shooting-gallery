@@ -39,4 +39,5 @@ shape = SubResource("CircleShape2D_ufrq1")
 
 [node name="holes" type="Node2D" parent="."]
 
+[connection signal="area_entered" from="Stick" to="." method="_on_stick_area_entered"]
 [connection signal="input_event" from="Bullseye" to="." method="_on_bullseye_input_event"]
