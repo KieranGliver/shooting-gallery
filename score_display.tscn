@@ -1,13 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cd7q5jiafv7be"]
+[gd_scene load_steps=2 format=3 uid="uid://cd7q5jiafv7be"]
 
 [ext_resource type="Script" uid="uid://dr0xpc13yxkkg" path="res://score_display.gd" id="1_1qcjw"]
-[ext_resource type="Texture2D" uid="uid://dgn664v4d7wgh" path="res://Assets/PNG/HUD/text_0_small.png" id="2_ewhq4"]
 
 [node name="ScoreDisplay" type="HBoxContainer"]
 offset_right = 32.0
 offset_bottom = 37.0
 script = ExtResource("1_1qcjw")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 2
-texture = ExtResource("2_ewhq4")

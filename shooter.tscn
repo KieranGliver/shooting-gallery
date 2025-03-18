@@ -1,14 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8y8ugia3ch8c"]
+[gd_scene load_steps=3 format=3 uid="uid://b8y8ugia3ch8c"]
 
 [ext_resource type="Script" uid="uid://oe3gbl8h7pjk" path="res://shooter.gd" id="1_5r21y"]
-[ext_resource type="Texture2D" uid="uid://cgleva0llbt31" path="res://Assets/PNG/HUD/crosshair_outline_large.png" id="1_jquju"]
 [ext_resource type="Texture2D" uid="uid://bljeya7s3d16k" path="res://Assets/PNG/Objects/rifle.png" id="2_5r21y"]
 
 [node name="Shooter" type="Node2D"]
 script = ExtResource("1_5r21y")
-
-[node name="Crosshair" type="Sprite2D" parent="."]
-texture = ExtResource("1_jquju")
 
 [node name="Gun" type="Sprite2D" parent="."]
 position = Vector2(180, 213)
