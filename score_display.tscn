@@ -1,8 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd7q5jiafv7be"]
-
-[ext_resource type="Script" uid="uid://dr0xpc13yxkkg" path="res://score_display.gd" id="1_1qcjw"]
+[gd_scene format=3 uid="uid://d2ept4pk26c3h"]
 
 [node name="ScoreDisplay" type="HBoxContainer"]
 offset_right = 32.0
 offset_bottom = 37.0
-script = ExtResource("1_1qcjw")
