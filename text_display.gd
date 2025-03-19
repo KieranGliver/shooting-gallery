@@ -18,6 +18,6 @@ var time_up: bool = false:
 		go = value
 
 @onready var go_display: TextureRect = $Go
-@onready var game_over_display: TextureRect = $Go
-@onready var ready_text_display: TextureRect = $Go
-@onready var time_up_display: TextureRect = $Go
+@onready var game_over_display: TextureRect = $GameOver
+@onready var ready_text_display: TextureRect = $Ready
+@onready var time_up_display: TextureRect = $TimeUp

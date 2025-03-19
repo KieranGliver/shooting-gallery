@@ -36,4 +36,8 @@ func _on_little_hand_timeout() -> void:
 	print("Tick: ", tick)
 	if tick > round_length:
 		print("GameOver")
-		GameManager.game_over()
+		game_over()
+
+
+func game_over():
+	text_display.game_over = true
