@@ -39,11 +39,11 @@ metadata/_edit_lock_ = true
 [node name="WaveManager" parent="ParallaxBackground" instance=ExtResource("3_dg77c")]
 position = Vector2(841, 241)
 wave_interval = 5
-terrain_y_offset = 100.0
+terrain_y_offset = -100.0
 target_distance = 1000.0
 target_speed = 100.0
-target_angle = 180.0
-target_amplitude = 200.0
+target_angle = 49.714
+target_amplitude = 50.0
 target_wavelength = 3.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

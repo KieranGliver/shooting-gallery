@@ -94,5 +94,5 @@ func update_terrain():
 		terrain.position = direction * target_distance + y_offset_vector
 		terrain.rotation_degrees = target_angle - 180
 	else:
-		terrain.position = Vector2.ZERO + y_offset_vector
+		terrain.position = Vector2.ZERO - y_offset_vector
 		terrain.rotation_degrees = target_angle
