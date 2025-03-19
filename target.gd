@@ -1,3 +1,4 @@
+@tool
 class_name Target
 extends Node2D
 
@@ -19,11 +20,6 @@ func _on_bullseye_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 			animation_player.queue("spin")
 			create_hole(to_local(event.position))
 			GlobalData.score += 1
-
-
-func _on_stick_area_entered(area: Area2D) -> void:
-	if area.is_in_group("death"):
-		queue_free()
 
 
 func create_hole(local_position: Vector2):

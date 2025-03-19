@@ -1,20 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://cc46sll2x4x5h"]
+[gd_scene load_steps=12 format=3 uid="uid://cc46sll2x4x5h"]
 
-[ext_resource type="Texture2D" uid="uid://c7ayovqw2ulg4" path="res://Assets/PNG/Stall/grass1.png" id="1_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cg44ws7alg0ya" path="res://Assets/PNG/Stall/bg_wood.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cwvel1dp367yi" path="res://Assets/PNG/Stall/curtain.png" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://gkllee53d8gf" path="res://main.gd" id="1_ycdy4"]
-[ext_resource type="Script" uid="uid://cpqu70ch7w61j" path="res://target_manager.gd" id="2_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bh36wrvrjew6o" path="res://Assets/PNG/Stall/curtain_rope.png" id="2_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cdtlmwrw371ep" path="res://Assets/PNG/Stall/curtain_straight.png" id="3_272bh"]
+[ext_resource type="PackedScene" uid="uid://it4glx3thati" path="res://wave_manager.tscn" id="3_dg77c"]
 [ext_resource type="Texture2D" uid="uid://bvx1fgyymb505" path="res://Assets/PNG/Stall/curtain_top.png" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://b8y8ugia3ch8c" path="res://shooter.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://b7kaox1uoee2m" path="res://ammo_display.tscn" id="10_dg77c"]
 [ext_resource type="Script" uid="uid://bddwilr0s1mkx" path="res://number_display.gd" id="12_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bhwbar473k2tk" path="res://text_display.tscn" id="14_w48qg"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
-size = Vector2(50, 500)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ycdy4")
@@ -39,23 +35,12 @@ texture = ExtResource("1_ig7tw")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="WaveManager" type="Node2D" parent="ParallaxBackground"]
+[node name="WaveManager" parent="ParallaxBackground" instance=ExtResource("3_dg77c")]
 position = Vector2(817, 282)
-script = ExtResource("2_4c57u")
-wave_length = 60
 wave_interval = 5
-target_velocity = Vector2(-200, 0)
-
-[node name="Grass" type="ParallaxLayer" parent="ParallaxBackground"]
-metadata/_edit_lock_ = true
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Grass"]
-offset_left = 1.0
-offset_top = 330.0
-offset_right = 757.0
-offset_bottom = 530.0
-texture = ExtResource("1_7mycd")
-stretch_mode = 1
+target_angle = 180.0
+target_speed = 100.0
+target_distance = 1000.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -117,12 +102,6 @@ metadata/_edit_lock_ = true
 
 [node name="TextDisplay" parent="CanvasLayer" instance=ExtResource("14_w48qg")]
 metadata/_edit_lock_ = true
-
-[node name="DeathZone" type="Area2D" parent="." groups=["death"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2(-200, 250)
-shape = SubResource("RectangleShape2D_kek77")
 
 [node name="LittleHand" type="Timer" parent="."]
 autostart = true

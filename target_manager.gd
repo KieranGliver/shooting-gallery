@@ -1,23 +1,38 @@
+@tool
 extends Node2D
 
 const TargetPackedScene: PackedScene = preload("res://target.tscn")
 
-@export var wave_length: int = 0
-@export var wave_interval: int = 0
-@export var target_velocity: Vector2 = Vector2.ZERO
+@export_subgroup("wave_data")
+@export var wave_interval: int = 0:
+	set(value):
+		wave_interval = value
+		_on_set_wave_interval()
+@export_subgroup("target_data")
+@export_range(-360.0, 360.0) var target_angle: float = 0.0:
+	set(value):
+		target_angle = value
+		_on_set_target_rotation()
+@export_range(0, 1000, 25) var target_speed: float = 0.0:
+	set(value):
+		target_speed = value
+		_on_set_target_speed()
+@export var target_distance: float = 0.0:
+	set(value):
+		target_distance = value
+		_on_set_target_distance()
 
-var internal_timer: Timer = Timer.new()
-var external_timer: Timer = Timer.new()
+var target_lifetime: float = 0.0
 
-@onready var next_wave: Wave = generate_wave()
+@onready var terrain: TextureRect = $Terrain
+@onready var internal_timer: Timer = $Timers/Internal
 
 
 func _ready():
-	add_child(internal_timer)
-	add_child(external_timer)
-	internal_timer.connect("timeout", _internal_timer_timeout)
-	external_timer.connect("timeout", _external_timer_timeout)
-	_external_timer_timeout()
+	_on_set_wave_interval()
+	_on_set_target_rotation()
+	_on_set_target_speed()
+	_on_set_target_distance()
 
 
 func _internal_timer_timeout():
@@ -25,31 +40,59 @@ func _internal_timer_timeout():
 	spawn_target()
 
 
-func _external_timer_timeout():
-	#print("WaveManager: load")
-	load_wave(next_wave)
-	next_wave = generate_wave()
-
-
 func spawn_target():
 	var target = TargetPackedScene.instantiate()
 	add_child(target)
-	target.velocity = target_velocity
+	move_child(target, 0) # Fix rendering behind terrain
+	target.velocity = Vector2.RIGHT.rotated(deg_to_rad(target_angle)) * target_speed
+	await get_tree().create_timer(target_lifetime).timeout
+	target.queue_free()
 
 
-func load_wave(wave: Wave):
-	internal_timer.stop()
-	external_timer.stop()
+func _on_set_wave_interval():
+	if internal_timer != null:
+		internal_timer.stop()
+		if wave_interval > 0:
+			internal_timer.wait_time = wave_interval
+			internal_timer.start()
+		print("Set Wave interval: ", wave_interval)
+
+
+func _on_set_target_rotation():
+	update_terrain()
+
+
+func _on_set_target_speed():
+	calculate_target_lifetime()
+
+
+func _on_set_target_distance():
+	calculate_target_lifetime()
+	update_terrain()
+
+
+func calculate_target_lifetime():
+	if target_speed > 0:
+		target_lifetime = target_distance / target_speed
+	else:
+		target_lifetime = 0.0
+
+
+func update_terrain():
+	if not terrain:
+		return
 	
-	internal_timer.wait_time = wave.interval
-	external_timer.wait_time = wave.length
+	var angle_rad = deg_to_rad(target_angle)
+	var direction = Vector2.RIGHT.rotated(angle_rad)
 	
-	internal_timer.start()
-	external_timer.start()
-
-
-func generate_wave():
-	var wave := Wave.new()
-	wave.interval = wave_interval
-	wave.length = wave_length
-	return wave
+	terrain.size = Vector2(target_distance, terrain.size.y)
+	
+	# Determine if the terrain should be flipped (angle between 90°-270°)
+	var is_backwards = target_angle > 90 and target_angle < 270
+	
+	if is_backwards:
+		terrain.position = direction * target_distance
+		terrain.rotation_degrees = target_angle - 180
+	else:
+		terrain.position = Vector2.ZERO
+		terrain.rotation_degrees = target_angle
