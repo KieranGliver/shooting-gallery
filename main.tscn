@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cc46sll2x4x5h"]
+[gd_scene load_steps=13 format=3 uid="uid://cc46sll2x4x5h"]
 
 [ext_resource type="Texture2D" uid="uid://cg44ws7alg0ya" path="res://Assets/PNG/Stall/bg_wood.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cwvel1dp367yi" path="res://Assets/PNG/Stall/curtain.png" id="1_lquwl"]
@@ -8,13 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://it4glx3thati" path="res://wave_manager.tscn" id="3_dg77c"]
 [ext_resource type="Texture2D" uid="uid://bvx1fgyymb505" path="res://Assets/PNG/Stall/curtain_top.png" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://b8y8ugia3ch8c" path="res://shooter.tscn" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://pv48qs4qy05a" path="res://Assets/PNG/HUD/icon_target.png" id="9_dg77c"]
 [ext_resource type="PackedScene" uid="uid://b7kaox1uoee2m" path="res://ammo_display.tscn" id="10_dg77c"]
 [ext_resource type="Script" uid="uid://bddwilr0s1mkx" path="res://number_display.gd" id="12_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bhwbar473k2tk" path="res://text_display.tscn" id="14_w48qg"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ycdy4")
-round_length = 10
+round_length = 60
 metadata/_edit_lock_ = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -36,11 +37,14 @@ stretch_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="WaveManager" parent="ParallaxBackground" instance=ExtResource("3_dg77c")]
-position = Vector2(817, 282)
+position = Vector2(841, 241)
 wave_interval = 5
-target_angle = 180.0
-target_speed = 100.0
+terrain_y_offset = 100.0
 target_distance = 1000.0
+target_speed = 100.0
+target_angle = 180.0
+target_amplitude = 200.0
+target_wavelength = 3.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -81,11 +85,12 @@ stretch_mode = 1
 offset_right = 32.0
 offset_bottom = 37.0
 script = ExtResource("12_w48qg")
+icon_image = ExtResource("9_dg77c")
 metadata/_custom_type_script = "uid://bddwilr0s1mkx"
 metadata/_edit_lock_ = true
 
 [node name="AmmoDisplay" parent="CanvasLayer" instance=ExtResource("10_dg77c")]
-max_ammo = 3
+max_ammo = 5
 metadata/_edit_lock_ = true
 
 [node name="TimeDisplay" type="HBoxContainer" parent="CanvasLayer"]
