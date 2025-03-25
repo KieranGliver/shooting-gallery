@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://beucu04b3vgss"]
 
-[ext_resource type="Script" uid="uid://bddwilr0s1mkx" path="res://number_display.gd" id="1_gxxe5"]
+[ext_resource type="Script" uid="uid://bddwilr0s1mkx" path="res://Scripts/number_display.gd" id="1_gxxe5"]
 
 [node name="NumberDisplay" type="HBoxContainer"]
 anchors_preset = 15

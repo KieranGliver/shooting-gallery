@@ -17,7 +17,7 @@ config/icon="res://Assets/icon.svg"
 
 [autoload]
 
-GlobalData="*res://global_data.gd"
+GlobalData="*res://Scripts/global_data.gd"
 
 [display]
 

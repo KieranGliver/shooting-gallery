@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7kaox1uoee2m"]
 
-[ext_resource type="Script" uid="uid://bd61o2nlkwei1" path="res://ammo_display.gd" id="1_2dwqw"]
+[ext_resource type="Script" uid="uid://bd61o2nlkwei1" path="res://Scripts/ammo_display.gd" id="1_2dwqw"]
 
 [node name="AmmoDisplay" type="HBoxContainer"]
 anchors_preset = 3

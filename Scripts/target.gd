@@ -2,8 +2,8 @@
 class_name Target
 extends Node2D
 
-const ShotHole: PackedScene = preload("res://shot_hole.tscn")
-const BrokenTarget: PackedScene = preload("res://broken_target.tscn")
+const ShotHole: PackedScene = preload("res://Scenes/shot_hole.tscn")
+const BrokenTarget: PackedScene = preload("res://Scenes/broken_target.tscn")
 
 @export var velocity: Vector2 = Vector2.ZERO
 @export var amplitude: float = 0.0

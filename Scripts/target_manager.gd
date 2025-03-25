@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-const TargetPackedScene: PackedScene = preload("res://target.tscn")
+const TargetPackedScene: PackedScene = preload("res://Scenes/target.tscn")
 
 @export var wave_interval: int = 0:
 	set(value):

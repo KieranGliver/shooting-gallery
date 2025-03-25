@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8y8ugia3ch8c"]
 
-[ext_resource type="Script" uid="uid://oe3gbl8h7pjk" path="res://shooter.gd" id="1_5r21y"]
+[ext_resource type="Script" uid="uid://oe3gbl8h7pjk" path="res://Scripts/shooter.gd" id="1_5r21y"]
 [ext_resource type="Texture2D" uid="uid://bljeya7s3d16k" path="res://Assets/PNG/Objects/rifle.png" id="2_5r21y"]
 
 [node name="Shooter" type="Node2D"]
