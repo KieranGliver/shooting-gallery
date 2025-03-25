@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cc46sll2x4x5h"]
+[gd_scene load_steps=16 format=3 uid="uid://cc46sll2x4x5h"]
 
 [ext_resource type="Texture2D" uid="uid://cg44ws7alg0ya" path="res://Assets/PNG/Stall/bg_wood.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cwvel1dp367yi" path="res://Assets/PNG/Stall/curtain.png" id="1_lquwl"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bh36wrvrjew6o" path="res://Assets/PNG/Stall/curtain_rope.png" id="2_7mycd"]
 [ext_resource type="Texture2D" uid="uid://cdtlmwrw371ep" path="res://Assets/PNG/Stall/curtain_straight.png" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://it4glx3thati" path="res://wave_manager.tscn" id="3_dg77c"]
+[ext_resource type="Texture2D" uid="uid://c7ayovqw2ulg4" path="res://Assets/PNG/Stall/grass1.png" id="4_vivmo"]
+[ext_resource type="Texture2D" uid="uid://bfoovrob4no2u" path="res://Assets/PNG/Stall/grass2.png" id="5_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bvx1fgyymb505" path="res://Assets/PNG/Stall/curtain_top.png" id="5_5vw27"]
+[ext_resource type="Texture2D" uid="uid://c4e77156vo0vx" path="res://Assets/PNG/Stall/water1.png" id="6_yaehf"]
 [ext_resource type="PackedScene" uid="uid://b8y8ugia3ch8c" path="res://shooter.tscn" id="7_272bh"]
 [ext_resource type="Texture2D" uid="uid://pv48qs4qy05a" path="res://Assets/PNG/HUD/icon_target.png" id="9_dg77c"]
 [ext_resource type="PackedScene" uid="uid://b7kaox1uoee2m" path="res://ammo_display.tscn" id="10_dg77c"]
@@ -36,47 +39,84 @@ texture = ExtResource("1_ig7tw")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="WaveManager" parent="ParallaxBackground" instance=ExtResource("3_dg77c")]
-position = Vector2(841, 241)
+[node name="WaveManagers" type="Node2D" parent="."]
+
+[node name="WaveManager" parent="WaveManagers" instance=ExtResource("3_dg77c")]
+position = Vector2(-120, 173)
+wave_interval = 15
+terrain_texture = ExtResource("4_vivmo")
+terrain_y_offset = 100.0
+target_distance = 1800.0
+target_speed = 200.0
+target_amplitude = 30.0
+target_wavelength = 4.0
+
+[node name="WaveManager2" parent="WaveManagers" instance=ExtResource("3_dg77c")]
+position = Vector2(1683, 319)
 wave_interval = 5
-terrain_y_offset = -100.0
-target_distance = 1000.0
+terrain_texture = ExtResource("5_2cqfq")
+terrain_y_offset = 100.0
+target_distance = 1800.0
+target_speed = 150.0
+target_angle = 180.0
+target_amplitude = 30.0
+target_wavelength = 4.0
+
+[node name="WaveManager3" parent="WaveManagers" instance=ExtResource("3_dg77c")]
+position = Vector2(-79, 450)
+wave_interval = 8
+terrain_texture = ExtResource("6_yaehf")
+terrain_y_offset = 100.0
+target_distance = 1800.0
 target_speed = 100.0
-target_angle = 49.714
-target_amplitude = 50.0
+target_amplitude = 40.0
+target_wavelength = 6.0
+
+[node name="WaveManager4" parent="WaveManagers" instance=ExtResource("3_dg77c")]
+position = Vector2(1653, 580)
+wave_interval = 7
+terrain_texture = ExtResource("6_yaehf")
+terrain_y_offset = 100.0
+target_distance = 1800.0
+target_speed = 100.0
+target_angle = 180.0
+target_amplitude = 20.0
 target_wavelength = 3.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Curtains" type="Node2D" parent="CanvasLayer"]
-metadata/_edit_lock_ = true
 
 [node name="CurtainTop" type="TextureRect" parent="CanvasLayer/Curtains"]
-offset_top = 42.0
-offset_right = 757.0
-offset_bottom = 105.0
+offset_top = 50.0
+offset_right = 1514.0
+offset_bottom = 113.0
 texture = ExtResource("5_5vw27")
 stretch_mode = 1
 
 [node name="CurtainLeft" type="Sprite2D" parent="CanvasLayer/Curtains"]
-position = Vector2(66, 214)
+position = Vector2(137, 428)
+scale = Vector2(2, 2)
 texture = ExtResource("1_lquwl")
 
 [node name="CurtainRight" type="Sprite2D" parent="CanvasLayer/Curtains"]
-position = Vector2(692, 213)
+position = Vector2(1384, 427)
+scale = Vector2(2, 2)
 texture = ExtResource("1_lquwl")
 flip_h = true
 
 [node name="CurtainRopeRight" type="Sprite2D" parent="CanvasLayer/Curtains"]
-position = Vector2(748, 214)
+position = Vector2(1494, 433)
+scale = Vector2(2, 2)
 texture = ExtResource("2_7mycd")
 
 [node name="CurtainRopeLeft" type="Sprite2D" parent="CanvasLayer/Curtains"]
-position = Vector2(14, 215)
+position = Vector2(23, 432)
+scale = Vector2(2, 2)
 texture = ExtResource("2_7mycd")
 
 [node name="CurtainStraight" type="TextureRect" parent="CanvasLayer/Curtains"]
-offset_right = 758.0
+offset_right = 1517.0
 offset_bottom = 80.0
 texture = ExtResource("3_272bh")
 stretch_mode = 1
@@ -109,6 +149,5 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="LittleHand" type="Timer" parent="."]
-autostart = true
 
 [connection signal="timeout" from="LittleHand" to="." method="_on_little_hand_timeout"]

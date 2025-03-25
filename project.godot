@@ -21,8 +21,8 @@ GlobalData="*res://global_data.gd"
 
 [display]
 
-window/size/viewport_width=757
-window/size/viewport_height=426
+window/size/viewport_width=1514
+window/size/viewport_height=852
 mouse_cursor/custom_image="uid://bl8u4fdv0n5jn"
 mouse_cursor/custom_image_hotspot=Vector2(23, 23)
 

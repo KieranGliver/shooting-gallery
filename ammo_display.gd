@@ -14,8 +14,10 @@ var ammo: int = 0:
 func _ready():
 	ammo = max_ammo
 
+
 func reload():
 	ammo = max_ammo
+
 
 func shoot() -> bool:
 	ammo -= 1
@@ -23,7 +25,8 @@ func shoot() -> bool:
 		reload()
 		return false
 	return true
-	
+
+
 func add_image(texture: Texture2D):
 	var display = TextureRect.new()
 	display.texture = texture
