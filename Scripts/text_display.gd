@@ -15,7 +15,7 @@ var ready_text: bool = false: # Can't name ready
 var time_up: bool = false:
 	set(value):
 		time_up_display.visible = value
-		go = value
+		time_up = value
 
 @onready var go_display: TextureRect = $Go
 @onready var game_over_display: TextureRect = $GameOver

@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://mjp8esela3jm"]
+
+[ext_resource type="PackedScene" uid="uid://beucu04b3vgss" path="res://Scenes/number_display.tscn" id="1_20j64"]
+[ext_resource type="Texture2D" uid="uid://bvy8lcfm1i0ab" path="res://Assets/PNG/HUD/text_gameover.png" id="1_mw63u"]
+[ext_resource type="Texture2D" uid="uid://bf4nr07lsb7vn" path="res://Assets/PNG/HUD/text_score_small.png" id="2_mw63u"]
+[ext_resource type="Texture2D" uid="uid://pv48qs4qy05a" path="res://Assets/PNG/HUD/icon_target.png" id="3_ejkqw"]
+
+[node name="NameInput" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.5
+offset_top = -108.0
+offset_right = 174.5
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="GameOver" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_mw63u")
+
+[node name="Score" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_mw63u")
+stretch_mode = 2
+
+[node name="NumberDisplay" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_20j64")]
+layout_mode = 2
+size_flags_horizontal = 4
+data = 10
+icon_image = ExtResource("3_ejkqw")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Input Your Name"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Usopp"
+alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Submit"

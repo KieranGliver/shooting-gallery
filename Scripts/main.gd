@@ -13,6 +13,7 @@ var current: State = State.IDLE
 @onready var ammo_display = $CanvasLayer/AmmoDisplay
 @onready var time_display = $CanvasLayer/TimeDisplay
 @onready var text_display = $CanvasLayer/TextDisplay
+@onready var leaderboard = $CanvasLayer/Leaderboard
 @onready var little_hand = $LittleHand
 
 
@@ -50,6 +51,10 @@ func _on_little_hand_timeout() -> void:
 	if tick == round_length:
 		print("GameOver")
 		game_over()
+	
+	if tick == round_length + 2:
+		text_display.time_up = false
+		leaderboard.visible = true
 
 
 func start():
@@ -59,7 +64,7 @@ func start():
 
 
 func game_over():
-	text_display.game_over = true
+	text_display.time_up = true
 	for child in wave_managers.get_children():
 		child.wave_interval = 0.0
 	for node in get_tree().get_nodes_in_group("target"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cc46sll2x4x5h"]
+[gd_scene load_steps=18 format=3 uid="uid://cc46sll2x4x5h"]
 
 [ext_resource type="Texture2D" uid="uid://cg44ws7alg0ya" path="res://Assets/PNG/Stall/bg_wood.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cwvel1dp367yi" path="res://Assets/PNG/Stall/curtain.png" id="1_lquwl"]
@@ -15,11 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://b7kaox1uoee2m" path="res://Scenes/ammo_display.tscn" id="10_dg77c"]
 [ext_resource type="Script" uid="uid://bddwilr0s1mkx" path="res://Scripts/number_display.gd" id="12_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bhwbar473k2tk" path="res://Scenes/text_display.tscn" id="14_w48qg"]
+[ext_resource type="PackedScene" uid="uid://mjp8esela3jm" path="res://Scenes/name_input.tscn" id="16_h1bgf"]
 [ext_resource type="PackedScene" uid="uid://b1iychvxnuwc5" path="res://Scenes/leaderboard.tscn" id="16_k12tt"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ycdy4")
-round_length = 60
+round_length = 10
 metadata/_edit_lock_ = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -150,17 +151,21 @@ metadata/_edit_lock_ = true
 [node name="TextDisplay" parent="CanvasLayer" instance=ExtResource("14_w48qg")]
 metadata/_edit_lock_ = true
 
+[node name="NameInput" parent="CanvasLayer" instance=ExtResource("16_h1bgf")]
+
 [node name="Leaderboard" parent="CanvasLayer" instance=ExtResource("16_k12tt")]
 visible = false
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
 offset_left = -177.5
-offset_top = -814.0
+offset_top = -407.0
 offset_right = 177.5
-offset_bottom = 0.0
-grow_vertical = 0
+offset_bottom = 407.0
+grow_vertical = 2
 
 [node name="LittleHand" type="Timer" parent="."]
 
 [connection signal="timeout" from="LittleHand" to="." method="_on_little_hand_timeout"]
+
+[editable path="CanvasLayer/NameInput"]
