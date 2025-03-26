@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cc46sll2x4x5h"]
+[gd_scene load_steps=17 format=3 uid="uid://cc46sll2x4x5h"]
 
 [ext_resource type="Texture2D" uid="uid://cg44ws7alg0ya" path="res://Assets/PNG/Stall/bg_wood.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cwvel1dp367yi" path="res://Assets/PNG/Stall/curtain.png" id="1_lquwl"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b7kaox1uoee2m" path="res://Scenes/ammo_display.tscn" id="10_dg77c"]
 [ext_resource type="Script" uid="uid://bddwilr0s1mkx" path="res://Scripts/number_display.gd" id="12_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bhwbar473k2tk" path="res://Scenes/text_display.tscn" id="14_w48qg"]
+[ext_resource type="PackedScene" uid="uid://b1iychvxnuwc5" path="res://Scenes/leaderboard.tscn" id="16_k12tt"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ycdy4")
@@ -86,6 +87,7 @@ target_wavelength = 3.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Curtains" type="Node2D" parent="CanvasLayer"]
+metadata/_edit_lock_ = true
 
 [node name="CurtainTop" type="TextureRect" parent="CanvasLayer/Curtains"]
 offset_top = 50.0
@@ -147,6 +149,17 @@ metadata/_edit_lock_ = true
 
 [node name="TextDisplay" parent="CanvasLayer" instance=ExtResource("14_w48qg")]
 metadata/_edit_lock_ = true
+
+[node name="Leaderboard" parent="CanvasLayer" instance=ExtResource("16_k12tt")]
+visible = false
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -177.5
+offset_top = -814.0
+offset_right = 177.5
+offset_bottom = 0.0
+grow_vertical = 0
 
 [node name="LittleHand" type="Timer" parent="."]
 

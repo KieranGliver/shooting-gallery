@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends PanelContainer
 
 const save_location = "user://highscore.save"
 
@@ -16,16 +16,16 @@ var scores: Array[Dictionary] = [
 ]
 
 @onready var labels = [
-	$Label,
-	$Label2,
-	$Label3,
-	$Label4,
-	$Label5,
-	$Label6,
-	$Label7,
-	$Label8,
-	$Label9,
-	$Label10,
+	$MarginContainer/VBoxContainer/Label,
+	$MarginContainer/VBoxContainer/Label2,
+	$MarginContainer/VBoxContainer/Label3,
+	$MarginContainer/VBoxContainer/Label4,
+	$MarginContainer/VBoxContainer/Label5,
+	$MarginContainer/VBoxContainer/Label6,
+	$MarginContainer/VBoxContainer/Label7,
+	$MarginContainer/VBoxContainer/Label8,
+	$MarginContainer/VBoxContainer/Label9,
+	$MarginContainer/VBoxContainer/Label10,
 ]
 
 

@@ -36,7 +36,18 @@ func _on_little_hand_timeout() -> void:
 	tick += 1
 	time_display.data = round_length - tick
 	print("Tick: ", tick)
-	if tick > round_length:
+	
+	if tick == 1:
+		text_display.ready_text = true
+	
+	if tick == 4:
+		text_display.ready_text = false
+		text_display.go = true
+	
+	if tick == 5:
+		text_display.go = false
+	
+	if tick == round_length:
 		print("GameOver")
 		game_over()
 
@@ -53,5 +64,4 @@ func game_over():
 		child.wave_interval = 0.0
 	for node in get_tree().get_nodes_in_group("target"):
 		node.queue_free()
-	little_hand.stop()
 	current = State.IDLE
