@@ -1,18 +1,15 @@
 extends PanelContainer
 
+signal pressed
+
 const save_location = "user://highscore.save"
 
 var scores: Array[Dictionary] = [
 	{"name": "Usopp", "value": 50},
-	{"name": "Nami", "value": 45},
-	{"name": "Sanji", "value": 40},
-	{"name": "Jinbe", "value": 35},
-	{"name": "Robin", "value": 30},
-	{"name": "Zoro", "value": 25},
-	{"name": "Brooke", "value": 20},
-	{"name": "Chopper", "value": 15},
-	{"name": "Johnny", "value": 10},
-	{"name": "Yosaku", "value": 5},
+	{"name": "Nami", "value": 40},
+	{"name": "Sanji", "value": 30},
+	{"name": "Zoro", "value": 20},
+	{"name": "Luffy", "value": 10},
 ]
 
 @onready var labels = [
@@ -21,11 +18,6 @@ var scores: Array[Dictionary] = [
 	$MarginContainer/VBoxContainer/Label3,
 	$MarginContainer/VBoxContainer/Label4,
 	$MarginContainer/VBoxContainer/Label5,
-	$MarginContainer/VBoxContainer/Label6,
-	$MarginContainer/VBoxContainer/Label7,
-	$MarginContainer/VBoxContainer/Label8,
-	$MarginContainer/VBoxContainer/Label9,
-	$MarginContainer/VBoxContainer/Label10,
 ]
 
 
@@ -33,16 +25,20 @@ func _ready():
 	update_scores()
 
 
+func _on_restart_button_pressed() -> void:
+	emit_signal("pressed")
+
+
 func update_scores():
 	sort_scores()
 	for index in scores.size():
-		labels[index].text = scores[index]["name"] + ": " + str(scores[index]["value"])
+		labels[index].text = scores[index]["name"] + ": " + str(scores[index]["value"] as int)
 
 
 func insert_score(key: String, val: int):
 	scores.append({"name": key, "value": val})
 	sort_scores()
-	scores.remove_at(scores.size())
+	scores.pop_back()
 
 
 func sort_scores():

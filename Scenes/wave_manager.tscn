@@ -10,9 +10,7 @@ offset_bottom = 200.001
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Timers" type="Node" parent="."]
-
-[node name="Internal" type="Timer" parent="Timers"]
+[node name="Internal" type="Timer" parent="."]
 wait_time = 2.0
 
-[connection signal="timeout" from="Timers/Internal" to="." method="_internal_timer_timeout"]
+[connection signal="timeout" from="Internal" to="." method="_internal_timer_timeout"]

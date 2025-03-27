@@ -41,6 +41,7 @@ func _on_bullseye_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 func _on_stick_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			animation_player.stop()
 			split()
 
 

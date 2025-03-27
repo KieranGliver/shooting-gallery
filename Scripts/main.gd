@@ -4,7 +4,6 @@ enum State {IDLE, RUNNING}
 
 @export var round_length: int = 0
 
-var events: Dictionary = {} # events[int] = Callable
 var tick: int = 0
 var current: State = State.IDLE
 
@@ -14,6 +13,7 @@ var current: State = State.IDLE
 @onready var time_display = $CanvasLayer/TimeDisplay
 @onready var text_display = $CanvasLayer/TextDisplay
 @onready var leaderboard = $CanvasLayer/Leaderboard
+@onready var name_input = $CanvasLayer/NameInput
 @onready var little_hand = $LittleHand
 
 
@@ -36,7 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_little_hand_timeout() -> void:
 	tick += 1
 	time_display.data = round_length - tick
-	print("Tick: ", tick)
+	#print("Tick: ", tick)
 	
 	if tick == 1:
 		text_display.ready_text = true
@@ -49,24 +49,42 @@ func _on_little_hand_timeout() -> void:
 		text_display.go = false
 	
 	if tick == round_length:
-		print("GameOver")
+		#print("GameOver")
 		game_over()
+		text_display.time_up = true
 	
 	if tick == round_length + 2:
 		text_display.time_up = false
-		leaderboard.visible = true
+		name_input.visible = true
+		name_input.score = GlobalData.score
 
 
 func start():
+	for child in wave_managers.get_children():
+		child.disabled = false
+	tick = 0
+	GlobalData.score = 0
 	time_display.data = round_length
-	little_hand.start()
 	current = State.RUNNING
 
 
 func game_over():
-	text_display.time_up = true
 	for child in wave_managers.get_children():
-		child.wave_interval = 0.0
+		child.disabled = true
 	for node in get_tree().get_nodes_in_group("target"):
 		node.queue_free()
 	current = State.IDLE
+
+
+func _on_name_input_pressed() -> void:
+	leaderboard.load_scores()
+	leaderboard.insert_score(name_input.line_edit.text, GlobalData.score)
+	leaderboard.update_scores()
+	leaderboard.save_scores()
+	name_input.visible = false
+	leaderboard.visible = true
+
+
+func _on_leaderboard_pressed() -> void:
+	leaderboard.visible = false
+	start()

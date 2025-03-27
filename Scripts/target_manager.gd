@@ -3,6 +3,10 @@ extends Node2D
 
 const TargetPackedScene: PackedScene = preload("res://Scenes/target.tscn")
 
+@export var disabled: bool = false:
+	set(value):
+		disabled = value
+		_on_set_disabled()
 @export var wave_interval: int = 0:
 	set(value):
 		wave_interval = value
@@ -34,10 +38,11 @@ const TargetPackedScene: PackedScene = preload("res://Scenes/target.tscn")
 var target_lifetime: float = 0.0
 
 @onready var terrain: TextureRect = $Terrain
-@onready var internal_timer: Timer = $Timers/Internal
+@onready var internal_timer: Timer = $Internal
 
 
 func _ready():
+	_on_set_disabled()
 	_on_set_terrain_texture()
 	_on_set_wave_interval()
 	_on_set_target_rotation()
@@ -47,20 +52,16 @@ func _ready():
 
 func _internal_timer_timeout():
 	#print("WaveManager: spawn")
-	spawn_target()
+	if not disabled:
+		spawn_target()
 
 
-func spawn_target():
-	var target = TargetPackedScene.instantiate()
-	add_child(target)
-	move_child(target, 0) # Move target rendering behind terrain
-	target.velocity = Vector2.RIGHT.rotated(deg_to_rad(target_angle)) * target_speed
-	target.amplitude = target_amplitude
-	target.wavelength = target_wavelength
-	# Replace later
-	await get_tree().create_timer(target_lifetime).timeout
-	if target:
-		target.queue_free()
+func _on_set_disabled():
+	if internal_timer:
+		if disabled:
+			internal_timer.stop()
+		else:
+			internal_timer.start()
 
 
 func _on_set_wave_interval():
@@ -71,7 +72,7 @@ func _on_set_wave_interval():
 	if wave_interval > 0:
 		internal_timer.wait_time = wave_interval
 		internal_timer.start()
-	print("Set Wave interval: ", wave_interval)
+	#print("Set Wave interval: ", wave_interval)
 
 
 func _on_set_terrain_texture():
@@ -91,6 +92,20 @@ func _on_set_target_speed():
 func _on_set_target_distance():
 	calculate_target_lifetime()
 	update_terrain()
+
+
+
+func spawn_target():
+	var target = TargetPackedScene.instantiate()
+	add_child(target)
+	move_child(target, 0) # Move target rendering behind terrain
+	target.velocity = Vector2.RIGHT.rotated(deg_to_rad(target_angle)) * target_speed
+	target.amplitude = target_amplitude
+	target.wavelength = target_wavelength
+	# Replace later
+	await get_tree().create_timer(target_lifetime).timeout
+	if target:
+		target.queue_free()
 
 
 func calculate_target_lifetime():

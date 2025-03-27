@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://mjp8esela3jm"]
+[gd_scene load_steps=6 format=3 uid="uid://mjp8esela3jm"]
 
 [ext_resource type="PackedScene" uid="uid://beucu04b3vgss" path="res://Scenes/number_display.tscn" id="1_20j64"]
 [ext_resource type="Texture2D" uid="uid://bvy8lcfm1i0ab" path="res://Assets/PNG/HUD/text_gameover.png" id="1_mw63u"]
+[ext_resource type="Script" uid="uid://jkl5f4wvmm55" path="res://Scripts/name_input.gd" id="1_vu0g6"]
 [ext_resource type="Texture2D" uid="uid://bf4nr07lsb7vn" path="res://Assets/PNG/HUD/text_score_small.png" id="2_mw63u"]
 [ext_resource type="Texture2D" uid="uid://pv48qs4qy05a" path="res://Assets/PNG/HUD/icon_target.png" id="3_ejkqw"]
 
@@ -17,6 +18,7 @@ offset_right = 174.5
 offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vu0g6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -41,7 +43,6 @@ stretch_mode = 2
 [node name="NumberDisplay" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_20j64")]
 layout_mode = 2
 size_flags_horizontal = 4
-data = 10
 icon_image = ExtResource("3_ejkqw")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
@@ -57,3 +58,5 @@ alignment = 1
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Submit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
